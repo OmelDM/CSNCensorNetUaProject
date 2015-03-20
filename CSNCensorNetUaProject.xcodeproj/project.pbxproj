@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A4494F01AB87A7100DB3E4E /* CSNNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */; };
+		1A689C581ABC7D92004A6627 /* CSNDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A689C571ABC7D92004A6627 /* CSNDownloader.m */; };
+		1AA5EBB41ABAF9B90066A62B /* CSNNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5EBB31ABAF9B90066A62B /* CSNNews.m */; };
+		1AA5EBB71ABAFB1F0066A62B /* CSNXMLParserOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5EBB61ABAFB1F0066A62B /* CSNXMLParserOperation.m */; };
 		1AF3C58E1AB877F4006FB959 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF3C58D1AB877F4006FB959 /* main.m */; };
 		1AF3C5911AB877F4006FB959 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF3C5901AB877F4006FB959 /* AppDelegate.m */; };
-		1AF3C5941AB877F4006FB959 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF3C5931AB877F4006FB959 /* FirstViewController.m */; };
-		1AF3C5971AB877F4006FB959 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF3C5961AB877F4006FB959 /* SecondViewController.m */; };
 		1AF3C59A1AB877F4006FB959 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF3C5981AB877F4006FB959 /* Main.storyboard */; };
 		1AF3C59C1AB877F4006FB959 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF3C59B1AB877F4006FB959 /* Images.xcassets */; };
 		1AF3C59F1AB877F4006FB959 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF3C59D1AB877F4006FB959 /* LaunchScreen.xib */; };
@@ -28,15 +30,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A4494EE1AB87A7100DB3E4E /* CSNNewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNNewsTableViewController.h; sourceTree = "<group>"; };
+		1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNNewsTableViewController.m; sourceTree = "<group>"; };
+		1A689C561ABC7D92004A6627 /* CSNDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSNDownloader.h; path = Sources/CSNDownloader.h; sourceTree = "<group>"; };
+		1A689C571ABC7D92004A6627 /* CSNDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNDownloader.m; path = Sources/CSNDownloader.m; sourceTree = "<group>"; };
+		1AA5EBB21ABAF9B90066A62B /* CSNNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSNNews.h; path = Sources/CSNNews.h; sourceTree = "<group>"; };
+		1AA5EBB31ABAF9B90066A62B /* CSNNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNNews.m; path = Sources/CSNNews.m; sourceTree = "<group>"; };
+		1AA5EBB51ABAFB1F0066A62B /* CSNXMLParserOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSNXMLParserOperation.h; path = Sources/CSNXMLParserOperation.h; sourceTree = "<group>"; };
+		1AA5EBB61ABAFB1F0066A62B /* CSNXMLParserOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNXMLParserOperation.m; path = Sources/CSNXMLParserOperation.m; sourceTree = "<group>"; };
 		1AF3C5881AB877F4006FB959 /* CSNCensorNetUaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSNCensorNetUaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF3C58C1AB877F4006FB959 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AF3C58D1AB877F4006FB959 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1AF3C58F1AB877F4006FB959 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1AF3C5901AB877F4006FB959 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1AF3C5921AB877F4006FB959 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		1AF3C5931AB877F4006FB959 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		1AF3C5951AB877F4006FB959 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		1AF3C5961AB877F4006FB959 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		1AF3C5991AB877F4006FB959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1AF3C59B1AB877F4006FB959 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1AF3C59E1AB877F4006FB959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -86,10 +92,14 @@
 			children = (
 				1AF3C58F1AB877F4006FB959 /* AppDelegate.h */,
 				1AF3C5901AB877F4006FB959 /* AppDelegate.m */,
-				1AF3C5921AB877F4006FB959 /* FirstViewController.h */,
-				1AF3C5931AB877F4006FB959 /* FirstViewController.m */,
-				1AF3C5951AB877F4006FB959 /* SecondViewController.h */,
-				1AF3C5961AB877F4006FB959 /* SecondViewController.m */,
+				1A4494EE1AB87A7100DB3E4E /* CSNNewsTableViewController.h */,
+				1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */,
+				1AA5EBB21ABAF9B90066A62B /* CSNNews.h */,
+				1AA5EBB31ABAF9B90066A62B /* CSNNews.m */,
+				1AA5EBB51ABAFB1F0066A62B /* CSNXMLParserOperation.h */,
+				1AA5EBB61ABAFB1F0066A62B /* CSNXMLParserOperation.m */,
+				1A689C561ABC7D92004A6627 /* CSNDownloader.h */,
+				1A689C571ABC7D92004A6627 /* CSNDownloader.m */,
 				1AF3C5981AB877F4006FB959 /* Main.storyboard */,
 				1AF3C59B1AB877F4006FB959 /* Images.xcassets */,
 				1AF3C59D1AB877F4006FB959 /* LaunchScreen.xib */,
@@ -224,10 +234,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AF3C5971AB877F4006FB959 /* SecondViewController.m in Sources */,
+				1AA5EBB71ABAFB1F0066A62B /* CSNXMLParserOperation.m in Sources */,
 				1AF3C5911AB877F4006FB959 /* AppDelegate.m in Sources */,
-				1AF3C5941AB877F4006FB959 /* FirstViewController.m in Sources */,
+				1AA5EBB41ABAF9B90066A62B /* CSNNews.m in Sources */,
+				1A4494F01AB87A7100DB3E4E /* CSNNewsTableViewController.m in Sources */,
 				1AF3C58E1AB877F4006FB959 /* main.m in Sources */,
+				1A689C581ABC7D92004A6627 /* CSNDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +432,7 @@
 				1AF3C5B01AB877F4006FB959 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1AF3C5B11AB877F4006FB959 /* Build configuration list for PBXNativeTarget "CSNCensorNetUaProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +441,7 @@
 				1AF3C5B31AB877F4006FB959 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

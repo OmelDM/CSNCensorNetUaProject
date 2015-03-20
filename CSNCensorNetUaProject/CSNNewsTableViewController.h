@@ -1,5 +1,5 @@
 //
-//  main.m
+//  CSNNewsTableViewController.h
 //  CSNCensorNetUaProject
 //
 //  Created by Dmytro Omelchuk on 3/17/15.
@@ -7,11 +7,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char * argv[]) {
-	@autoreleasepool {
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-	}
-}
+@interface CSNNewsTableViewController : UITableViewController
+
+@end
