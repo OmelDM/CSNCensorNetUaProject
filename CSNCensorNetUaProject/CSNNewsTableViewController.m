@@ -7,10 +7,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #import "CSNNewsTableViewController.h"
+#import "CSNNewsDetailsViewController.h"
 #import "CSNXMLParserOperation.h"
+#import "CSNNewsTableViewCell.h"
+#import "CSNNews.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNNewsTableViewController ()
+
+@property NSArray *news;
 
 @end
 
@@ -34,40 +39,41 @@
 	
 	theOperation.completionBlock = ^()
 	{
-		NSLog(@"%@", theWeakOperation.news);
+		self.news = theWeakOperation.news;
+		dispatch_async(dispatch_get_main_queue(), ^()
+		{
+			[self.tableView reloadData];
+		});
 	};
 
 	[[NSOperationQueue new] addOperation:theOperation];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView
+{
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)aSection
+{
+	return self.news.count;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)anIndexPath
+{
+    CSNNewsTableViewCell *theCell = [aTableView
+				dequeueReusableCellWithIdentifier:@"NewsCell" forIndexPath:anIndexPath];
+	CSNNews *theNews = self.news[anIndexPath.row];
+	theCell.dateLabel.text = [NSDateFormatter localizedStringFromDate:theNews.pubDate
+				dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+	theCell.titleView.text = theNews.title;
+
+	return theCell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -103,14 +109,17 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)aSegue sender:(id)aSender
+{
+	if ([aSegue.identifier isEqualToString:@"NewsDetailsSegue"])
+	{
+		CSNNews *theCurrentNews = self.news[self.tableView.indexPathForSelectedRow.row];
+		CSNNewsDetailsViewController *theDestination = aSegue.destinationViewController;
+		theDestination.currentNews = theCurrentNews;
+	}
 }
-*/
+
 
 @end

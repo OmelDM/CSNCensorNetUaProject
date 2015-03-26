@@ -43,15 +43,20 @@
 	return self;
 }
 
-- (NSString *)addFileToDownloaderFromURL:(NSURL *)anURL
+- (NSString *)addFileToDownloaderAtURL:(NSURL *)anURL
 {
-	NSString *thePathToFile = [self pathToDownloadedFileWithURL:anURL];
+	NSString *thePathToFile = [self pathToDownloadedFileAtURL:anURL];
 
 	if (![[NSFileManager defaultManager] fileExistsAtPath:thePathToFile])
 	{
 		NSURLSessionDownloadTask *theTask = [self.session downloadTaskWithURL:anURL
-					completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error)
+					completionHandler:^(NSURL *aLocation, NSURLResponse *aResponse, NSError *anError)
 					{
+						if (nil != anError)
+						{
+							#warning Handle error
+						}
+						
 						NSFileManager *theManager = [NSFileManager defaultManager];
 						NSError *theError = nil;
 						
@@ -68,7 +73,7 @@
 						}
 						
 						theError = nil;
-						if (![theManager copyItemAtURL:location toURL:[NSURL
+						if (![theManager copyItemAtURL:aLocation toURL:[NSURL
 									fileURLWithPath:thePathToFile] error:&theError])
 						{
 							#warning Handle error
@@ -80,7 +85,7 @@
 }
 
 #pragma mark Private methods
-- (NSString *)pathToDownloadedFileWithURL:(NSURL *)anURL
+- (NSString *)pathToDownloadedFileAtURL:(NSURL *)anURL
 {
 	NSString *theDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
 				NSUserDomainMask, YES) lastObject];

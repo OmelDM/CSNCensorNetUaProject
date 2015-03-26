@@ -12,7 +12,8 @@
 @interface CSNXMLParserOperation : NSOperation
 
 /**
-	Array of CSNNews objects from parsed RSS (XML)
+	Array of CSNNews objects from parsed RSS (XML). Should be called after
+	operation will finished
  */
 @property (nonatomic, readonly) NSArray *news;
 

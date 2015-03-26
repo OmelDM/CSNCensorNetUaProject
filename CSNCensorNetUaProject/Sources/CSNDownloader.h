@@ -16,6 +16,6 @@
 /**
 	@return NSString with path to downloaded file
 */
-- (NSString *)addFileToDownloaderFromURL:(NSURL *)anURL;
+- (NSString *)addFileToDownloaderAtURL:(NSURL *)anURL;
 
 @end

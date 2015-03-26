@@ -52,15 +52,19 @@ NSString *const kURLName = @"url";
 #pragma mark NSOperation overrode methods
 - (void)main
 {
-	@try
+	@autoreleasepool
 	{
-		NSXMLParser *theParser = [[NSXMLParser alloc] initWithData:self.parsedData];
-		theParser.delegate = self;
-		[theParser parse];
-	}
-	@catch(...)
-	{
-		#warning Handle exception
+		@try
+		{
+			NSXMLParser *theParser = [[NSXMLParser alloc]
+						initWithData:self.parsedData];
+			theParser.delegate = self;
+			[theParser parse];
+		}
+		@catch(...)
+		{
+			#warning Handle exception
+		}
 	}
 }
 
@@ -107,7 +111,7 @@ NSString *const kURLName = @"url";
 		{
 			self.currentNews.enclosure = theURL;
 			self.currentNews.imagePath = [[CSNDownloader sharedDownloader]
-						addFileToDownloaderFromURL:[NSURL URLWithString:theURL]];
+						addFileToDownloaderAtURL:[NSURL URLWithString:theURL]];
 		}
 	}
 
