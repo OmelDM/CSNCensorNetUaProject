@@ -17,6 +17,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="KkW-Aw-cl8" kind="relationship" relationship="viewControllers" id="XZu-A2-pAI"/>
+                        <segue destination="lGu-vQ-Rs4" kind="relationship" relationship="viewControllers" id="ewP-ho-6KP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -79,6 +80,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rgt-ml-KnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1429" y="-275"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="hy6-MK-icj">
+            <objects>
+                <tableViewController id="hM9-Ej-P6a" customClass="CSNArticlesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZWv-Xf-sLS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" id="9mj-7T-GB7" customClass="CSNNewsTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9mj-7T-GB7" id="dgk-9i-uUn">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzX-Ub-dws">
+                                            <rect key="frame" x="96" y="10" width="463" height="16"/>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="HH:mm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okk-Sy-U7Q">
+                                            <rect key="frame" x="8" y="8" width="80" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" priority="750" constant="80" id="Dsv-yp-Pab"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="GzX-Ub-dws" firstAttribute="leading" secondItem="Okk-Sy-U7Q" secondAttribute="trailing" constant="8" id="LLy-xC-Wny"/>
+                                        <constraint firstItem="Okk-Sy-U7Q" firstAttribute="top" secondItem="dgk-9i-uUn" secondAttribute="topMargin" id="M7d-rO-dr6"/>
+                                        <constraint firstItem="GzX-Ub-dws" firstAttribute="top" secondItem="dgk-9i-uUn" secondAttribute="topMargin" constant="2" id="VQO-tA-4PM"/>
+                                        <constraint firstItem="GzX-Ub-dws" firstAttribute="trailing" secondItem="dgk-9i-uUn" secondAttribute="trailingMargin" id="ewN-EW-Ff3"/>
+                                        <constraint firstItem="GzX-Ub-dws" firstAttribute="leading" secondItem="Okk-Sy-U7Q" secondAttribute="trailing" constant="8" id="f6T-Jk-GXG"/>
+                                        <constraint firstItem="Okk-Sy-U7Q" firstAttribute="leading" secondItem="dgk-9i-uUn" secondAttribute="leadingMargin" id="xcT-Wf-bG3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="Okk-Sy-U7Q" id="uOE-1e-lvp"/>
+                                    <outlet property="titleView" destination="GzX-Ub-dws" id="NMz-N8-pec"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hM9-Ej-P6a" id="WNN-11-tc3"/>
+                            <outlet property="delegate" destination="hM9-Ej-P6a" id="U6T-in-ysr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="0th-vQ-KRe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L63-4m-QgJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1552" y="423"/>
+        </scene>
+        <!--Articles-->
+        <scene sceneID="snL-qC-rrF">
+            <objects>
+                <navigationController id="lGu-vQ-Rs4" userLabel="Articles" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Articles" image="first" id="CPh-dF-3ED"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5wH-U2-8r4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hM9-Ej-P6a" kind="relationship" relationship="rootViewController" id="UTI-zO-9Rb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gS0-A6-4vk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="732" y="423"/>
         </scene>
         <!--News Details View Controller-->
         <scene sceneID="1W1-Gz-TsY">
@@ -151,7 +225,7 @@
         <scene sceneID="ICb-ZR-jod">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KkW-Aw-cl8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="News" id="yfU-vp-fkh"/>
+                    <tabBarItem key="tabBarItem" title="News" image="second" id="yfU-vp-fkh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rA2-66-oux">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -167,4 +241,8 @@
             <point key="canvasLocation" x="704" y="-262"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
+    </resources>
 </document>

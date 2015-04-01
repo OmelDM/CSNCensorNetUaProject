@@ -1,39 +1,38 @@
 //
-//  CSNNewsTableViewController.m
+//  CSNArticlesTableViewController.m
 //  CSNCensorNetUaProject
 //
-//  Created by Dmytro Omelchuk on 3/17/15.
+//  Created by Dmytro Omelchuk on 3/26/15.
 //  Copyright (c) 2015 Dmytro Omelchuk. All rights reserved.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#import "CSNNewsTableViewController.h"
-#import "CSNNewsDetailsViewController.h"
+#import "CSNArticlesTableViewController.h"
 #import "CSNXMLParserOperation.h"
 #import "CSNNewsTableViewCell.h"
 #import "CSNNews.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-@interface CSNNewsTableViewController ()
+@interface CSNArticlesTableViewController ()
 
-@property NSArray *news;
+@property NSArray *articles;
 
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
-@implementation CSNNewsTableViewController
+@implementation CSNArticlesTableViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-
-	self.title = @"News";
+	[super viewDidLoad];
+	
+	self.title = @"Articles";
 	
 //	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
-//				URLWithString:@"http://en.censor.net.ua/includes/news_full_en.xml"]];
+//				URLWithString:@"http://en.censor.net.ua/includes/resonance_full_en.xml"]];
 
 #warning test solution
 	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
-				fileURLWithPath:@"/Users/omel/Documents/Projects/censor_net_rss.xml"]];
+				fileURLWithPath:@"/Users/omel/Documents/Projects/resonance_full_en.xml"]];
 	
 	CSNXMLParserOperation *theOperation = [[CSNXMLParserOperation alloc]
 				initWithData:theXML complitionHandler:^(NSArray *anItems, NSError *anError)
@@ -44,7 +43,7 @@
 						return;
 					}
 					
-					self.news = anItems;
+					self.articles = anItems;
 					dispatch_async(dispatch_get_main_queue(), ^()
 					{
 						[self.tableView reloadData];
@@ -54,16 +53,22 @@
 	[[NSOperationQueue new] addOperation:theOperation];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView
 {
+    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)aSection
 {
-	return self.news.count;
+    return self.articles.count;
 }
 
 
@@ -71,7 +76,7 @@
 {
     CSNNewsTableViewCell *theCell = [aTableView
 				dequeueReusableCellWithIdentifier:@"NewsCell" forIndexPath:anIndexPath];
-	CSNNews *theNews = self.news[anIndexPath.row];
+	CSNNews *theNews = self.articles[anIndexPath.row];
 	theCell.dateLabel.text = [NSDateFormatter localizedStringFromDate:theNews.pubDate
 				dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
 	theCell.titleView.text = theNews.title;
@@ -114,17 +119,14 @@
 }
 */
 
+/*
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)aSegue sender:(id)aSender
-{
-	if ([aSegue.identifier isEqualToString:@"NewsDetailsSegue"])
-	{
-		CSNNews *theCurrentNews = self.news[self.tableView.indexPathForSelectedRow.row];
-		CSNNewsDetailsViewController *theDestination = aSegue.destinationViewController;
-		theDestination.currentNews = theCurrentNews;
-	}
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
-
+*/
 
 @end

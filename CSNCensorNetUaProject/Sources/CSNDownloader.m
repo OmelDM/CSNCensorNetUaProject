@@ -21,12 +21,14 @@
 + (instancetype)sharedDownloader
 {
 	static CSNDownloader *sDownloader = nil;
-	static dispatch_once_t sOnceToken;
-    dispatch_once(&sOnceToken,
-	^{
-		sDownloader = [[self alloc] init];
-    });
-	
+	@synchronized(self)
+	{
+		static dispatch_once_t sOnceToken;
+		dispatch_once(&sOnceToken,
+		^{
+			sDownloader = [[self alloc] init];
+		});
+	}
 	return sDownloader;
 }
 
@@ -55,6 +57,8 @@
 						if (nil != anError)
 						{
 							#warning Handle error
+							NSLog(@"error: %@", anError);
+							return ;
 						}
 						
 						NSFileManager *theManager = [NSFileManager defaultManager];

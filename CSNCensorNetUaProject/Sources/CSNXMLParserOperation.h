@@ -12,15 +12,12 @@
 @interface CSNXMLParserOperation : NSOperation
 
 /**
-	Array of CSNNews objects from parsed RSS (XML). Should be called after
-	operation will finished
- */
-@property (nonatomic, readonly) NSArray *news;
-
-/**
-	Initializes operation object with RSS (XML) data to parse
+	Initializes operation object with RSS (XML) data to parse and completion block
 	@param aData RSS (XML) data to parse
+	@param aCompletionHandler Parameters of completion block are array of
+	CSNNews objects from parsed RSS (XML) and NSError object (is nil in case of any error)
 */
-- (instancetype)initWithData:(NSData *)aData;
+- (instancetype)initWithData:(NSData *)aData
+			complitionHandler:(void (^)(NSArray *anItems, NSError *anError))aCompletionHandler;
 
 @end

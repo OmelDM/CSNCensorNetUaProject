@@ -31,7 +31,7 @@ NSString *const kURLName = @"url";
 @property (nonatomic, strong) NSMutableString *currentCharacters;
 @property (nonatomic, strong) NSDataDetector *dataDetector;
 @property (nonatomic, strong) NSArray *news;
-
+@property (nonatomic, copy) void (^completionHandler)(NSArray *anItems, NSError *anError);
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +49,20 @@ NSString *const kURLName = @"url";
 	return self;
 }
 
+- (instancetype)initWithData:(NSData *)aData
+			complitionHandler:(void (^)(NSArray *anItems, NSError *anError))aCompletionHandler
+{
+	self = [super init];
+	
+	if (nil != self)
+	{
+		self.parsedData = aData;
+		self.completionHandler = aCompletionHandler;
+	}
+	
+	return self;
+}
+
 #pragma mark NSOperation overrode methods
 - (void)main
 {
@@ -59,11 +73,16 @@ NSString *const kURLName = @"url";
 			NSXMLParser *theParser = [[NSXMLParser alloc]
 						initWithData:self.parsedData];
 			theParser.delegate = self;
-			[theParser parse];
+			if (![theParser parse])
+			{
+				self.completionHandler(nil, theParser.parserError);
+			}
 		}
 		@catch(...)
 		{
-			#warning Handle exception
+			self.completionHandler(nil, [NSError
+						errorWithDomain:NSCocoaErrorDomain code:101
+						userInfo:@{NSLocalizedDescriptionKey: @"Unexpected parser error"}]);
 		}
 	}
 }
@@ -79,7 +98,7 @@ NSString *const kURLName = @"url";
 
 - (void)parserDidEndDocument:(NSXMLParser *)aParser
 {
-	self.news = [NSArray arrayWithArray:self.compositNews];
+	self.completionHandler([NSArray arrayWithArray:self.compositNews], nil);
 	self.compositNews = nil;
 	self.currentNews = nil;
 	self.currentCharacters = nil;
@@ -168,7 +187,7 @@ NSString *const kURLName = @"url";
 
 - (void)parser:(NSXMLParser *)aParser parseErrorOccurred:(NSError *)aParseError
 {
-	#warning Handle error
+	self.completionHandler(nil, aParseError);
 }
 
 #pragma mark Private methods
