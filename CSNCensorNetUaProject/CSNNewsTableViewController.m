@@ -39,8 +39,7 @@
 				fileURLWithPath:@"/Users/omel/Documents/Projects/censor_net_rss.xml"]];
 	
 	CSNXMLParserOperation *theOperation = [[CSNXMLParserOperation alloc]
-				initWithData:theXML persistentStoreCoordinator:self.persistentStoreCoordinator
-				complitionHandler:^(NSArray *anItems, NSError *anError)
+				initWithData:theXML	complitionHandler:^(NSArray *anItems, NSError *anError)
 				{
 					if (nil != anError)
 					{
@@ -48,8 +47,17 @@
 						return;
 					}
 					
-					NSFetchRequest *theRequest = [[NSFetchRequest alloc] initWithEntityName:@"News"];
+					[self addNewsFromArray:anItems];
 					NSError *theError = nil;
+					if (![self.managedObjectContext save:&theError])
+					{
+						#warning Handle error
+						return;
+					}
+					
+					NSFetchRequest *theRequest = [[NSFetchRequest alloc] initWithEntityName:@"News"];
+					theRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO]];
+					theError = nil;
 					self.news = [self.managedObjectContext executeFetchRequest:theRequest error:&theError];
 					NSLog(@"count: %ld", self.news.count);
 					if (nil != theError)
@@ -192,6 +200,60 @@
 	_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:theModelURL];
 	
 	return _managedObjectModel;
+}
+
+#pragma mark Private methods
+
+- (void)addNewsFromArray:(NSArray *)anArray
+{
+	if (0 == anArray.count)
+	{
+		return;
+	}
+	
+	NSFetchRequest *theRequest = [NSFetchRequest fetchRequestWithEntityName:@"News"];
+	theRequest.propertiesToFetch = @[@"guid"];
+    [theRequest setResultType:NSDictionaryResultType];
+	
+	for (NSDictionary *theNews in anArray)
+	{
+		theRequest.predicate = [NSPredicate predicateWithFormat:@"guid = %@",
+					theNews[@"guid"]];
+		NSError *theError = nil;
+		NSArray *theFoundNews = [self.managedObjectContext
+					executeFetchRequest:theRequest error:&theError];
+		if (nil != theError)
+		{
+			#warning handle error
+			continue;
+		}
+		
+		if (0 == theFoundNews.count)
+		{
+			CSNNews *theInsertedNews = [self newsWithDictionary:theNews];
+			[self.managedObjectContext insertObject:theInsertedNews];
+		}
+	}
+}
+
+- (CSNNews *)newsWithDictionary:(NSDictionary *)aDictionary
+{
+
+	NSEntityDescription *theEntity = [NSEntityDescription entityForName:@"News"
+				inManagedObjectContext:self.managedObjectContext];
+	CSNNews *theResultNews = [[CSNNews alloc] initWithEntity:theEntity
+				insertIntoManagedObjectContext:nil];
+	theResultNews.title = aDictionary[kTitleName];
+	theResultNews.link = aDictionary[kLinkName];
+	theResultNews.details = aDictionary[kDescriptionName];
+	theResultNews.guid = aDictionary[kGuidName];
+	theResultNews.pubDate = aDictionary[kPubDateName];
+	theResultNews.comments = aDictionary[kCommentsName];
+	theResultNews.enclosure = aDictionary[kEnclosureName];
+	theResultNews.imagePath = aDictionary[kImagePathName];
+	theResultNews.content = aDictionary[kContentName];
+	
+	return theResultNews;
 }
 
 @end
