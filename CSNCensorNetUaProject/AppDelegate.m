@@ -17,8 +17,18 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)anApplication didFinishLaunchingWithOptions:(NSDictionary *)aLaunchOptions
+{
+	UIImage *theBackground = [UIImage imageNamed:@"TabBarBackground"];
+	[[UITabBar appearance] setBackgroundImage:theBackground];
+	
+	[[UINavigationBar appearance] setBackgroundImage:theBackground forBarMetrics:UIBarMetricsDefault];
+
+	[[UINavigationBar appearance] setTitleTextAttributes:
+				@{NSForegroundColorAttributeName:
+				[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0],
+				NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0]}];
+				
 	return YES;
 }
 

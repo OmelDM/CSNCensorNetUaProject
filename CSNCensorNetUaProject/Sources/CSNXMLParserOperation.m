@@ -131,8 +131,8 @@ NSString *const kImagePathName = @"imagePath";
 		if (nil != theURL)
 		{
 			self.currentNews[kEnclosureName] = theURL;
-			self.currentNews[kImagePathName] = [[CSNDownloader sharedDownloader]
-						addFileToDownloaderAtURL:[NSURL URLWithString:theURL]];
+			self.currentNews[kImagePathName] = [[[CSNDownloader sharedDownloader]
+						addFileToDownloaderAtURL:[NSURL URLWithString:theURL]] copy];
 		}
 	}
 

@@ -29,14 +29,17 @@
 {
     [super viewDidLoad];
 
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
+	self.tableView.estimatedRowHeight = 61.0;
+	
 	self.title = @"News";
 	
-//	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
-//				URLWithString:@"http://en.censor.net.ua/includes/news_full_en.xml"]];
-
-#warning test solution
 	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
-				fileURLWithPath:@"/Users/omel/Documents/Projects/censor_net_rss.xml"]];
+				URLWithString:@"http://en.censor.net.ua/includes/news_full_en.xml"]];
+
+//#warning test solution
+//	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
+//				fileURLWithPath:@"/Users/omel/Documents/Projects/censor_net_rss.xml"]];
 	
 	CSNXMLParserOperation *theOperation = [[CSNXMLParserOperation alloc]
 				initWithData:theXML	complitionHandler:^(NSArray *anItems, NSError *anError)
@@ -95,7 +98,7 @@
 	CSNNews *theNews = self.news[anIndexPath.row];
 	theCell.dateLabel.text = [NSDateFormatter localizedStringFromDate:theNews.pubDate
 				dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
-	theCell.titleView.text = theNews.title;
+	theCell.titleLabel.text = theNews.title;
 
 	return theCell;
 }

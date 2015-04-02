@@ -11,7 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNNewsTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *titleView;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 
 @end
