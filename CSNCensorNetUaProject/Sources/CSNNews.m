@@ -11,6 +11,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 @implementation CSNNews
 
+@dynamic title, link, details, guid, pubDate, comments, enclosure, imagePath, content;
+
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"News: %@\nPublication date: %@\nDetails: "

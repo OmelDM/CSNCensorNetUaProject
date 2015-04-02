@@ -16,6 +16,9 @@
 @interface CSNNewsTableViewController ()
 
 @property NSArray *news;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
@@ -36,7 +39,8 @@
 				fileURLWithPath:@"/Users/omel/Documents/Projects/censor_net_rss.xml"]];
 	
 	CSNXMLParserOperation *theOperation = [[CSNXMLParserOperation alloc]
-				initWithData:theXML complitionHandler:^(NSArray *anItems, NSError *anError)
+				initWithData:theXML persistentStoreCoordinator:self.persistentStoreCoordinator
+				complitionHandler:^(NSArray *anItems, NSError *anError)
 				{
 					if (nil != anError)
 					{
@@ -44,7 +48,16 @@
 						return;
 					}
 					
-					self.news = anItems;
+					NSFetchRequest *theRequest = [[NSFetchRequest alloc] initWithEntityName:@"News"];
+					NSError *theError = nil;
+					self.news = [self.managedObjectContext executeFetchRequest:theRequest error:&theError];
+					NSLog(@"count: %ld", self.news.count);
+					if (nil != theError)
+					{
+						#warning Handle error
+						return;
+					}
+					
 					dispatch_async(dispatch_get_main_queue(), ^()
 					{
 						[self.tableView reloadData];
@@ -126,5 +139,59 @@
 	}
 }
 
+#pragma mark Core Data
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+	if (nil != _managedObjectContext)
+	{
+		return _managedObjectContext;
+	}
+	
+	NSPersistentStoreCoordinator *theCoordinator = [self persistentStoreCoordinator];
+	if (nil != theCoordinator)
+	{
+		_managedObjectContext = [[NSManagedObjectContext alloc] init];
+		[_managedObjectContext setPersistentStoreCoordinator:theCoordinator];
+	}
+	return _managedObjectContext;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+	if (nil != _persistentStoreCoordinator)
+	{
+		return _persistentStoreCoordinator;
+	}
+	
+	NSURL *theStoreURL = [[[[NSFileManager defaultManager]
+				URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]
+				lastObject] URLByAppendingPathComponent:@"News_Data.sqlite"];
+	
+	NSError *theError = nil;
+	_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+				initWithManagedObjectModel:[self managedObjectModel]];
+	
+	if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+				configuration:nil URL:theStoreURL options:nil error:&theError])
+	{
+		#warning Handle error
+	}
+	
+	return _persistentStoreCoordinator;
+}
+
+- (NSManagedObjectModel *)managedObjectModel
+{
+	if (nil != _managedObjectModel)
+	{
+		return _managedObjectModel;
+	}
+	
+	NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"NewsData" withExtension:@"momd"];
+	_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:theModelURL];
+	
+	return _managedObjectModel;
+}
 
 @end

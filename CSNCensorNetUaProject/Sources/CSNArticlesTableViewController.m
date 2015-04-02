@@ -31,26 +31,26 @@
 //				URLWithString:@"http://en.censor.net.ua/includes/resonance_full_en.xml"]];
 
 #warning test solution
-	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
-				fileURLWithPath:@"/Users/omel/Documents/Projects/resonance_full_en.xml"]];
-	
-	CSNXMLParserOperation *theOperation = [[CSNXMLParserOperation alloc]
-				initWithData:theXML complitionHandler:^(NSArray *anItems, NSError *anError)
-				{
-					if (nil != anError)
-					{
-						#warning Handle error
-						return;
-					}
-					
-					self.articles = anItems;
-					dispatch_async(dispatch_get_main_queue(), ^()
-					{
-						[self.tableView reloadData];
-					});
-				}];
-
-	[[NSOperationQueue new] addOperation:theOperation];
+//	NSData *theXML = [NSData dataWithContentsOfURL:[NSURL
+//				fileURLWithPath:@"/Users/omel/Documents/Projects/resonance_full_en.xml"]];
+//	
+//	CSNXMLParserOperation *theOperation = [[CSNXMLParserOperation alloc]
+//				initWithData:theXML complitionHandler:^(NSArray *anItems, NSError *anError)
+//				{
+//					if (nil != anError)
+//					{
+//						#warning Handle error
+//						return;
+//					}
+//					
+//					self.articles = anItems;
+//					dispatch_async(dispatch_get_main_queue(), ^()
+//					{
+//						[self.tableView reloadData];
+//					});
+//				}];
+//
+//	[[NSOperationQueue new] addOperation:theOperation];
 }
 
 - (void)didReceiveMemoryWarning {

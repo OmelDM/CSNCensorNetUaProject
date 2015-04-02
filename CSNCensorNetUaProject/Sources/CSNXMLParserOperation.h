@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 ////////////////////////////////////////////////////////////////////////////////
+@class NSPersistentStoreCoordinator;
+
+////////////////////////////////////////////////////////////////////////////////
 @interface CSNXMLParserOperation : NSOperation
 
 /**
@@ -17,7 +20,7 @@
 	@param aCompletionHandler Parameters of completion block are array of
 	CSNNews objects from parsed RSS (XML) and NSError object (is nil in case of any error)
 */
-- (instancetype)initWithData:(NSData *)aData
+- (instancetype)initWithData:(NSData *)aData persistentStoreCoordinator:(NSPersistentStoreCoordinator *)aCoordinator
 			complitionHandler:(void (^)(NSArray *anItems, NSError *anError))aCompletionHandler;
 
 @end

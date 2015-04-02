@@ -32,6 +32,9 @@ NSString *const kURLName = @"url";
 @property (nonatomic, strong) NSDataDetector *dataDetector;
 @property (nonatomic, strong) NSArray *news;
 @property (nonatomic, copy) void (^completionHandler)(NSArray *anItems, NSError *anError);
+// TODO: move away from parser any core data handling
+@property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
+@property (nonatomic, strong) NSManagedObjectContext *context;
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +52,7 @@ NSString *const kURLName = @"url";
 	return self;
 }
 
-- (instancetype)initWithData:(NSData *)aData
+- (instancetype)initWithData:(NSData *)aData persistentStoreCoordinator:(NSPersistentStoreCoordinator *)aCoordinator
 			complitionHandler:(void (^)(NSArray *anItems, NSError *anError))aCompletionHandler
 {
 	self = [super init];
@@ -58,6 +61,7 @@ NSString *const kURLName = @"url";
 	{
 		self.parsedData = aData;
 		self.completionHandler = aCompletionHandler;
+		self.coordinator = aCoordinator;
 	}
 	
 	return self;
@@ -70,6 +74,9 @@ NSString *const kURLName = @"url";
 	{
 		@try
 		{
+			self.context = [[NSManagedObjectContext alloc] init];
+			self.context.persistentStoreCoordinator = self.coordinator;
+		NSLog(@"start parser count: %ld", [self.context executeFetchRequest:[[NSFetchRequest alloc] initWithEntityName:@"News"] error:NULL].count);
 			NSXMLParser *theParser = [[NSXMLParser alloc]
 						initWithData:self.parsedData];
 			theParser.delegate = self;
@@ -98,6 +105,13 @@ NSString *const kURLName = @"url";
 
 - (void)parserDidEndDocument:(NSXMLParser *)aParser
 {
+	NSError *theError = nil;
+	if (![self.context save:&theError])
+	{
+		#warning Handle error
+		self.completionHandler(nil, theError);
+	}
+	
 	self.completionHandler([NSArray arrayWithArray:self.compositNews], nil);
 	self.compositNews = nil;
 	self.currentNews = nil;
@@ -111,7 +125,10 @@ NSString *const kURLName = @"url";
 {
 	if ([anElementName isEqualToString:kItemName])
 	{
-		self.currentNews = [CSNNews new];
+		NSEntityDescription *theEntity = [NSEntityDescription entityForName:@"News"
+					inManagedObjectContext:self.context];
+		self.currentNews = [[CSNNews alloc] initWithEntity:theEntity
+					insertIntoManagedObjectContext:nil];
 	}
 	else if (nil != self.currentNews && ([anElementName isEqualToString:kTitleName] ||
 				[anElementName isEqualToString:kLinkName] ||
@@ -145,7 +162,7 @@ NSString *const kURLName = @"url";
 	}
 	else if ([anElementName isEqualToString:kItemName])
 	{
-		[self.compositNews addObject:self.currentNews];
+		[self addNews:self.currentNews];
 	}
 	else if ([anElementName isEqualToString:kTitleName])
 	{
@@ -153,7 +170,7 @@ NSString *const kURLName = @"url";
 	}
 	else if ([anElementName isEqualToString:kLinkName])
 	{
-		self.currentNews.link = [NSURL URLWithString:self.currentCharacters];
+		self.currentNews.link = self.currentCharacters;
 	}
 	else if ([anElementName isEqualToString:kDescriptionName])
 	{
@@ -161,7 +178,7 @@ NSString *const kURLName = @"url";
 	}
 	else if ([anElementName isEqualToString:kGuidName])
 	{
-		self.currentNews.guid = [NSURL URLWithString:self.currentCharacters];
+		self.currentNews.guid = self.currentCharacters;
 	}
 	else if ([anElementName isEqualToString:kPubDateName])
 	{
@@ -172,7 +189,7 @@ NSString *const kURLName = @"url";
 	}
 	else if ([anElementName isEqualToString:kCommentsName])
 	{
-		self.currentNews.comments = [NSURL URLWithString:self.currentCharacters];
+		self.currentNews.comments = self.currentCharacters;
 	}
 	else if ([anElementName isEqualToString:kContentName])
 	{
@@ -199,6 +216,27 @@ NSString *const kURLName = @"url";
 	theResult = [theResult stringByReplacingOccurrencesOfString:@"\n\n" withString:@"\n"];
 	
 	return theResult;
+}
+
+- (void)addNews:(CSNNews *)aNews
+{
+	NSFetchRequest *theRequest = [NSFetchRequest fetchRequestWithEntityName:@"News"];
+	theRequest.predicate = [NSPredicate predicateWithFormat:@"guid = %@", aNews.guid];
+	theRequest.propertiesToFetch = @[@"guid"];
+    [theRequest setResultType:NSDictionaryResultType];
+	
+	NSError *theError = nil;
+	NSArray *theFoundNews = [self.context executeFetchRequest:theRequest error:&theError];
+	if (nil != theError)
+	{
+		#warning handle error
+		return;
+	}
+	
+	if (0 == theFoundNews.count)
+	{
+		[self.context insertObject:aNews];
+	}
 }
 
 @end

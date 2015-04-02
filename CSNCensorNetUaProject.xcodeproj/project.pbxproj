@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3EC1601ACC9AFD001D43D3 /* NewsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EC15E1ACC9AFD001D43D3 /* NewsData.xcdatamodeld */; };
 		1A4494F01AB87A7100DB3E4E /* CSNNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */; };
 		1A689C581ABC7D92004A6627 /* CSNDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A689C571ABC7D92004A6627 /* CSNDownloader.m */; };
 		1A6DF5071AC43E6C00C92AFF /* CSNArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6DF5061AC43E6C00C92AFF /* CSNArticlesTableViewController.m */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A3EC15F1ACC9AFD001D43D3 /* NewsData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsData.xcdatamodel; sourceTree = "<group>"; };
 		1A4494EE1AB87A7100DB3E4E /* CSNNewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNNewsTableViewController.h; sourceTree = "<group>"; };
 		1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNNewsTableViewController.m; sourceTree = "<group>"; };
 		1A689C561ABC7D92004A6627 /* CSNDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSNDownloader.h; path = Sources/CSNDownloader.h; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				1AF3C5981AB877F4006FB959 /* Main.storyboard */,
 				1AF3C59B1AB877F4006FB959 /* Images.xcassets */,
 				1AF3C59D1AB877F4006FB959 /* LaunchScreen.xib */,
+				1A3EC15E1ACC9AFD001D43D3 /* NewsData.xcdatamodeld */,
 				1AF3C58B1AB877F4006FB959 /* Supporting Files */,
 			);
 			path = CSNCensorNetUaProject;
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A3EC1601ACC9AFD001D43D3 /* NewsData.xcdatamodeld in Sources */,
 				1A742AE81ABDA0BE00849948 /* CSNNewsTableViewCell.m in Sources */,
 				1AA5EBB71ABAFB1F0066A62B /* CSNXMLParserOperation.m in Sources */,
 				1AF3C5911AB877F4006FB959 /* AppDelegate.m in Sources */,
@@ -462,6 +466,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1A3EC15E1ACC9AFD001D43D3 /* NewsData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1A3EC15F1ACC9AFD001D43D3 /* NewsData.xcdatamodel */,
+			);
+			currentVersion = 1A3EC15F1ACC9AFD001D43D3 /* NewsData.xcdatamodel */;
+			name = NewsData.xcdatamodeld;
+			path = Resources/NewsData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1AF3C5801AB877F4006FB959 /* Project object */;
 }
