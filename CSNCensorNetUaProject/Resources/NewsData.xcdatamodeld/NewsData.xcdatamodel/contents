@@ -6,12 +6,11 @@
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="enclosure" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="guid" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pubDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="News" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="News" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>

@@ -45,13 +45,14 @@
 	return self;
 }
 
-- (NSString *)addFileToDownloaderAtURL:(NSURL *)anURL
+- (void)addFileToDownloaderAtURL:(NSString *)anURL
 {
-	NSString *thePathToFile = [self pathToDownloadedFileAtURL:anURL];
+	NSString *thePathToFile = CSNPathToStoredFileFromURLString(anURL);
 
 	if (![[NSFileManager defaultManager] fileExistsAtPath:thePathToFile])
 	{
-		NSURLSessionDownloadTask *theTask = [self.session downloadTaskWithURL:anURL
+		NSURLSessionDownloadTask *theTask = [self.session
+					downloadTaskWithURL:[NSURL URLWithString:anURL]
 					completionHandler:^(NSURL *aLocation, NSURLResponse *aResponse, NSError *anError)
 					{
 						if (nil != anError)
@@ -69,7 +70,7 @@
 						{
 							if (![theManager createDirectoryAtPath:[thePathToFile
 									stringByDeletingLastPathComponent]
-									withIntermediateDirectories:NO
+									withIntermediateDirectories:YES
 									attributes:nil error:&theError])
 							{
 								#warning Handle error
@@ -85,17 +86,8 @@
 					}];
 		[theTask resume];
 	}
-	return thePathToFile;
 }
 
-#pragma mark Private methods
-- (NSString *)pathToDownloadedFileAtURL:(NSURL *)anURL
-{
-	NSString *theDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
-				NSUserDomainMask, YES) lastObject];
-	NSString *thePath = [theDirectory stringByAppendingFormat:@"/%@/%ld.jpg",
-				[[NSBundle mainBundle] bundleIdentifier], [anURL hash]];
-	return thePath;
-}
+#pragma mark - Private methods
 
 @end

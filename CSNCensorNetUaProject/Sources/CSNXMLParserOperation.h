@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Dmytro Omelchuk. All rights reserved.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#import <Foundation/Foundation.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 extern NSString *const kTitleName;
@@ -17,7 +16,6 @@ extern NSString *const kPubDateName;
 extern NSString *const kCommentsName;
 extern NSString *const kContentName;
 extern NSString *const kEnclosureName;
-extern NSString *const kImagePathName;
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNXMLParserOperation : NSOperation

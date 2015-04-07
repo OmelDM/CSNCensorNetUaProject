@@ -79,7 +79,7 @@
 	CSNNews *theNews = self.articles[anIndexPath.row];
 	theCell.dateLabel.text = [NSDateFormatter localizedStringFromDate:theNews.pubDate
 				dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
-	theCell.titleView.text = theNews.title;
+	theCell.titleLabel.text = theNews.title;
 
 	return theCell;
 }

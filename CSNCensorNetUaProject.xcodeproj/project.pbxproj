@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0BB12A1AD3F828004D3E1C /* CSNCommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0BB1291AD3F828004D3E1C /* CSNCommonFunctions.m */; };
 		1A3EC1601ACC9AFD001D43D3 /* NewsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EC15E1ACC9AFD001D43D3 /* NewsData.xcdatamodeld */; };
 		1A4494F01AB87A7100DB3E4E /* CSNNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */; };
 		1A689C581ABC7D92004A6627 /* CSNDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A689C571ABC7D92004A6627 /* CSNDownloader.m */; };
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A0BB1271AD3F53A004D3E1C /* CSNPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSNPrefixHeader.pch; path = Sources/CSNPrefixHeader.pch; sourceTree = "<group>"; };
+		1A0BB1281AD3F7FC004D3E1C /* CSNCommonFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CSNCommonFunctions.h; path = Sources/CSNCommonFunctions.h; sourceTree = "<group>"; };
+		1A0BB1291AD3F828004D3E1C /* CSNCommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNCommonFunctions.m; path = Sources/CSNCommonFunctions.m; sourceTree = "<group>"; };
 		1A3EC15F1ACC9AFD001D43D3 /* NewsData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsData.xcdatamodel; sourceTree = "<group>"; };
 		1A4494EE1AB87A7100DB3E4E /* CSNNewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNNewsTableViewController.h; sourceTree = "<group>"; };
 		1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNNewsTableViewController.m; sourceTree = "<group>"; };
@@ -80,6 +84,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A0BB12B1AD3FB09004D3E1C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1AF3C5981AB877F4006FB959 /* Main.storyboard */,
+				1AF3C59B1AB877F4006FB959 /* Images.xcassets */,
+				1AF3C59D1AB877F4006FB959 /* LaunchScreen.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1A0BB12C1AD3FB25004D3E1C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1AF3C58F1AB877F4006FB959 /* AppDelegate.h */,
+				1AF3C5901AB877F4006FB959 /* AppDelegate.m */,
+				1A0BB1271AD3F53A004D3E1C /* CSNPrefixHeader.pch */,
+				1A0BB1281AD3F7FC004D3E1C /* CSNCommonFunctions.h */,
+				1A0BB1291AD3F828004D3E1C /* CSNCommonFunctions.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		1A0BB12D1AD3FB48004D3E1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1AA5EBB21ABAF9B90066A62B /* CSNNews.h */,
+				1AA5EBB31ABAF9B90066A62B /* CSNNews.m */,
+				1A3EC15E1ACC9AFD001D43D3 /* NewsData.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		1AF3C57F1AB877F4006FB959 = {
 			isa = PBXGroup;
 			children = (
@@ -101,8 +137,7 @@
 		1AF3C58A1AB877F4006FB959 /* CSNCensorNetUaProject */ = {
 			isa = PBXGroup;
 			children = (
-				1AF3C58F1AB877F4006FB959 /* AppDelegate.h */,
-				1AF3C5901AB877F4006FB959 /* AppDelegate.m */,
+				1A0BB12C1AD3FB25004D3E1C /* Common */,
 				1A4494EE1AB87A7100DB3E4E /* CSNNewsTableViewController.h */,
 				1A4494EF1AB87A7100DB3E4E /* CSNNewsTableViewController.m */,
 				1ACFF8041AC02B2C00B0DE11 /* CSNNewsDetailsViewController.h */,
@@ -111,16 +146,12 @@
 				1A742AE71ABDA0BE00849948 /* CSNNewsTableViewCell.m */,
 				1A6DF5051AC43E6C00C92AFF /* CSNArticlesTableViewController.h */,
 				1A6DF5061AC43E6C00C92AFF /* CSNArticlesTableViewController.m */,
-				1AA5EBB21ABAF9B90066A62B /* CSNNews.h */,
-				1AA5EBB31ABAF9B90066A62B /* CSNNews.m */,
 				1AA5EBB51ABAFB1F0066A62B /* CSNXMLParserOperation.h */,
 				1AA5EBB61ABAFB1F0066A62B /* CSNXMLParserOperation.m */,
 				1A689C561ABC7D92004A6627 /* CSNDownloader.h */,
 				1A689C571ABC7D92004A6627 /* CSNDownloader.m */,
-				1AF3C5981AB877F4006FB959 /* Main.storyboard */,
-				1AF3C59B1AB877F4006FB959 /* Images.xcassets */,
-				1AF3C59D1AB877F4006FB959 /* LaunchScreen.xib */,
-				1A3EC15E1ACC9AFD001D43D3 /* NewsData.xcdatamodeld */,
+				1A0BB12D1AD3FB48004D3E1C /* Model */,
+				1A0BB12B1AD3FB09004D3E1C /* Resources */,
 				1AF3C58B1AB877F4006FB959 /* Supporting Files */,
 			);
 			path = CSNCensorNetUaProject;
@@ -257,6 +288,7 @@
 				1AA5EBB71ABAFB1F0066A62B /* CSNXMLParserOperation.m in Sources */,
 				1AF3C5911AB877F4006FB959 /* AppDelegate.m in Sources */,
 				1AA5EBB41ABAF9B90066A62B /* CSNNews.m in Sources */,
+				1A0BB12A1AD3F828004D3E1C /* CSNCommonFunctions.m in Sources */,
 				1A6DF5071AC43E6C00C92AFF /* CSNArticlesTableViewController.m in Sources */,
 				1A4494F01AB87A7100DB3E4E /* CSNNewsTableViewController.m in Sources */,
 				1AF3C58E1AB877F4006FB959 /* main.m in Sources */,
@@ -385,6 +417,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CSNCensorNetUaProject/Sources/CSNPrefixHeader.pch;
 				INFOPLIST_FILE = CSNCensorNetUaProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -395,6 +429,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CSNCensorNetUaProject/Sources/CSNPrefixHeader.pch;
 				INFOPLIST_FILE = CSNCensorNetUaProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

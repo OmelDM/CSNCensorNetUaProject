@@ -253,7 +253,6 @@
 	theResultNews.pubDate = aDictionary[kPubDateName];
 	theResultNews.comments = aDictionary[kCommentsName];
 	theResultNews.enclosure = aDictionary[kEnclosureName];
-	theResultNews.imagePath = aDictionary[kImagePathName];
 	theResultNews.content = aDictionary[kContentName];
 	
 	return theResultNews;

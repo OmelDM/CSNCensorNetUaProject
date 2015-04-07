@@ -21,7 +21,6 @@ NSString *const kCommentsName = @"comments";
 NSString *const kContentName = @"content";
 NSString *const kEnclosureName = @"enclosure";
 NSString *const kURLName = @"url";
-NSString *const kImagePathName = @"imagePath";
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNXMLParserOperation () <NSXMLParserDelegate>
@@ -128,11 +127,11 @@ NSString *const kImagePathName = @"imagePath";
 	else if (nil != self.currentNews && [anElementName isEqualToString:kEnclosureName])
 	{
 		NSString *theURL = anAttributeDictionary[kURLName];
-		if (nil != theURL)
+		if ([theURL containsString:@"censor_news_small"])
 		{
 			self.currentNews[kEnclosureName] = theURL;
-			self.currentNews[kImagePathName] = [[[CSNDownloader sharedDownloader]
-						addFileToDownloaderAtURL:[NSURL URLWithString:theURL]] copy];
+			[[CSNDownloader sharedDownloader]
+						addFileToDownloaderAtURL:theURL];
 		}
 	}
 

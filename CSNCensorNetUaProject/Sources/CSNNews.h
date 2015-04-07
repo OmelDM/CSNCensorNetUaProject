@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Dmytro Omelchuk. All rights reserved.
 //
 ////////////////////////////////////////////////////////////////////////////////
-#import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +18,7 @@
 @property (nonatomic, copy) NSDate *pubDate;
 @property (nonatomic, copy) NSString *comments;
 @property (nonatomic, copy) NSString *enclosure;
-@property (nonatomic, copy) NSString *imagePath;
+@property (nonatomic, readonly) NSString *imagePath;
 @property (nonatomic, copy) NSString *content;
 
 @end

@@ -1,0 +1,22 @@
+//
+//  CSNPrefixHeader.pch
+//  CSNCensorNetUaProject
+//
+//  Created by Dmytro Omelchuk on 4/7/15.
+//  Copyright (c) 2015 Dmytro Omelchuk. All rights reserved.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#ifndef CSNCensorNetUaProject_CSNPrefixHeader_pch
+#define CSNCensorNetUaProject_CSNPrefixHeader_pch
+
+#ifdef __OBJC__
+
+	#import <UIKit/UIKit.h>
+	#import <Foundation/Foundation.h>
+
+#endif
+
+#import "CSNCommonFunctions.h"
+
+#endif

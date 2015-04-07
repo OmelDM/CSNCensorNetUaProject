@@ -11,17 +11,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 @implementation CSNNews
 
-@dynamic title, link, details, guid, pubDate, comments, enclosure, imagePath, content;
+@dynamic title, link, details, guid, pubDate, comments, enclosure, content;
 
-- (NSString *)description
+- (NSString *)imagePath
 {
-	return [NSString stringWithFormat:@"News: %@\nPublication date: %@\nDetails: "
-				"%@\nContent: %@\nPath to image: %@\nImage URL: %@\nLink: %@\n"
-				"Comments: %@\nPersistant link: %@",
-				self.title, [NSDateFormatter localizedStringFromDate:self.pubDate
-				dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle],
-				self.details, self.content, self.imagePath, self.enclosure,
-				self.link, self.comments, self.guid];
+	return CSNPathToStoredFileFromURLString(self.enclosure);
 }
 
 @end
