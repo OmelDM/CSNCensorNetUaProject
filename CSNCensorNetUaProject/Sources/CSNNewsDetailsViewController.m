@@ -8,6 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #import "CSNNewsDetailsViewController.h"
 #import "CSNNews.h"
+#import "CSNEnclosure.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNNewsDetailsViewController ()
@@ -16,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *fotoView;
 @property (nonatomic, weak) IBOutlet UITextView *contentView;
+@property (weak, nonatomic) IBOutlet UIScrollView *fotosView;
 
 @end
 
@@ -29,7 +31,25 @@
 				localizedStringFromDate:self.currentNews.pubDate
 				dateStyle:NSDateFormatterFullStyle timeStyle:NSDateFormatterShortStyle];
 	self.titleLabel.text = self.currentNews.title;
-	self.fotoView.image = [UIImage imageWithContentsOfFile:self.currentNews.imagePath];
+	
+	__block CSNEnclosure *theFoudEnclosure = nil;
+	NSSet *theSet = self.currentNews.enclosure;
+	CGFloat theX = 0.0;
+	for (CSNEnclosure *theEnclosure in theSet)
+	{
+		UIImage *theFoto = [UIImage imageWithContentsOfFile:theEnclosure.path];
+		CGRect theFotoViewFrame = CGRectMake(theX, 0, 150.0, 100.0);
+		theX += 150.0;
+		UIImageView *theFotoView = [[UIImageView alloc] initWithFrame:theFotoViewFrame];
+		theFotoView.image = theFoto;
+		[self.fotosView addSubview:theFotoView];
+	}
+	
+	if (nil != theFoudEnclosure)
+	{
+		self.fotoView.image = [UIImage imageWithContentsOfFile:theFoudEnclosure.path];
+	}
+	
 	self.contentView.text = self.currentNews.content;
 	
 }

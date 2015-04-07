@@ -17,7 +17,8 @@ extern NSString *const kPubDateName;
 extern NSString *const kCommentsName;
 extern NSString *const kContentName;
 extern NSString *const kEnclosureName;
-extern NSString *const kImagePathName;
+extern NSString *const kURLName;
+extern NSString *const kPathName;
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNXMLParserOperation : NSOperation

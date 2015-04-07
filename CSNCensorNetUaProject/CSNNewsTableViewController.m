@@ -11,6 +11,7 @@
 #import "CSNXMLParserOperation.h"
 #import "CSNNewsTableViewCell.h"
 #import "CSNNews.h"
+#import "CSNEnclosure.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNNewsTableViewController ()
@@ -47,7 +48,7 @@
 					if (nil != anError)
 					{
 						#warning Handle error
-						return;
+						abort();
 					}
 					
 					[self addNewsFromArray:anItems];
@@ -55,10 +56,12 @@
 					if (![self.managedObjectContext save:&theError])
 					{
 						#warning Handle error
-						return;
+						abort();
 					}
 					
 					NSFetchRequest *theRequest = [[NSFetchRequest alloc] initWithEntityName:@"News"];
+					theRequest.returnsObjectsAsFaults = NO;
+					theRequest.relationshipKeyPathsForPrefetching = @[@"enclosure"];
 					theRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO]];
 					theError = nil;
 					self.news = [self.managedObjectContext executeFetchRequest:theRequest error:&theError];
@@ -66,7 +69,7 @@
 					if (nil != theError)
 					{
 						#warning Handle error
-						return;
+						abort();
 					}
 					
 					dispatch_async(dispatch_get_main_queue(), ^()
@@ -150,7 +153,7 @@
 	}
 }
 
-#pragma mark Core Data
+#pragma mark - Core Data
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -205,7 +208,7 @@
 	return _managedObjectModel;
 }
 
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void)addNewsFromArray:(NSArray *)anArray
 {
@@ -252,9 +255,20 @@
 	theResultNews.guid = aDictionary[kGuidName];
 	theResultNews.pubDate = aDictionary[kPubDateName];
 	theResultNews.comments = aDictionary[kCommentsName];
-	theResultNews.enclosure = aDictionary[kEnclosureName];
-	theResultNews.imagePath = aDictionary[kImagePathName];
 	theResultNews.content = aDictionary[kContentName];
+
+	for (NSDictionary *theDict in aDictionary[kEnclosureName])
+	{
+//		NSEntityDescription *theEntity = [NSEntityDescription entityForName:@"Enclosure"
+//				inManagedObjectContext:self.managedObjectContext];
+		CSNEnclosure *theResultEnclosure = [NSEntityDescription
+					insertNewObjectForEntityForName:@"Enclosure"
+					inManagedObjectContext:self.managedObjectContext];
+		theResultEnclosure.url = theDict[kURLName];
+		theResultEnclosure.path = theDict[kPathName];
+		[theResultNews addEnclosureObject:theResultEnclosure];
+//		[self.managedObjectContext insertObject:theResultEnclosure];
+	}
 	
 	return theResultNews;
 }

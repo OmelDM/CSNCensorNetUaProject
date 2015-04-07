@@ -21,7 +21,7 @@ NSString *const kCommentsName = @"comments";
 NSString *const kContentName = @"content";
 NSString *const kEnclosureName = @"enclosure";
 NSString *const kURLName = @"url";
-NSString *const kImagePathName = @"imagePath";
+NSString *const kPathName = @"path";
 
 ////////////////////////////////////////////////////////////////////////////////
 @interface CSNXMLParserOperation () <NSXMLParserDelegate>
@@ -130,9 +130,11 @@ NSString *const kImagePathName = @"imagePath";
 		NSString *theURL = anAttributeDictionary[kURLName];
 		if (nil != theURL)
 		{
-			self.currentNews[kEnclosureName] = theURL;
-			self.currentNews[kImagePathName] = [[[CSNDownloader sharedDownloader]
-						addFileToDownloaderAtURL:[NSURL URLWithString:theURL]] copy];
+			NSMutableSet *theEnclosures = [NSMutableSet
+						setWithSet:self.currentNews[kEnclosureName]];
+			[theEnclosures addObject:@{kURLName: theURL, kPathName: [[CSNDownloader sharedDownloader]
+						addFileToDownloaderAtURL:[NSURL URLWithString:theURL]]}];
+			self.currentNews[kEnclosureName] = [NSSet setWithSet:theEnclosures];
 		}
 	}
 

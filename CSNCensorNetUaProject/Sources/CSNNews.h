@@ -10,16 +10,26 @@
 #import <CoreData/CoreData.h>
 
 ////////////////////////////////////////////////////////////////////////////////
+@class CSNEnclosure;
+
+////////////////////////////////////////////////////////////////////////////////
 @interface CSNNews : NSManagedObject
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *link;
-@property (nonatomic, copy) NSString *details; // stands for 'description' node
-@property (nonatomic, copy) NSString *guid;
-@property (nonatomic, copy) NSDate *pubDate;
-@property (nonatomic, copy) NSString *comments;
-@property (nonatomic, copy) NSString *enclosure;
-@property (nonatomic, copy) NSString *imagePath;
-@property (nonatomic, copy) NSString *content;
+@property (nonatomic, retain) NSString *comments;
+@property (nonatomic, retain) NSString *content;
+@property (nonatomic, retain) NSString *details;
+@property (nonatomic, retain) NSString *guid;
+@property (nonatomic, retain) NSString *link;
+@property (nonatomic, retain) NSDate *pubDate;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSSet *enclosure;
+@end
+
+@interface CSNNews (CoreDataGeneratedAccessors)
+
+- (void)addEnclosureObject:(CSNEnclosure *)aValue;
+- (void)removeEnclosureObject:(CSNEnclosure *)aValue;
+- (void)addEnclosure:(NSSet *)aValues;
+- (void)removeEnclosure:(NSSet *)aValues;
 
 @end
